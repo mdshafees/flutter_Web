@@ -5,6 +5,7 @@ import 'package:flutter_application_2/constants.dart';
 import '../components/chart.dart';
 import '../components/header.dart';
 import '../components/myFIles.dart';
+import '../components/recentDetail.dart';
 import '../components/storageDetail.dart';
 
 class DashBoardScreen extends StatefulWidget {
@@ -31,7 +32,15 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
               children: [
                 Expanded(
                   flex: 5,
-                  child: MyFiles(),
+                  child: Column(
+                    children: [
+                      MyFiles(),
+                      const SizedBox(
+                        height: defaultPadding,
+                      ),
+                      const RecentFiles()
+                    ],
+                  ),
                 ),
                 const SizedBox(
                   width: defaultPadding,
