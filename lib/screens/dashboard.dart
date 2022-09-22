@@ -1,6 +1,7 @@
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_2/constants.dart';
+import 'package:flutter_application_2/responsive.dart';
 
 import '../components/chart.dart';
 import '../components/header.dart';
@@ -38,14 +39,21 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
                       const SizedBox(
                         height: defaultPadding,
                       ),
-                      const RecentFiles()
+                      const RecentFiles(),
+                      if (!Responsive.isDesktop(context))
+                        const SizedBox(
+                          height: defaultPadding,
+                        ),
+                      if (!Responsive.isDesktop(context)) StorageDetail(),
                     ],
                   ),
                 ),
-                const SizedBox(
-                  width: defaultPadding,
-                ),
-                const Expanded(flex: 2, child: StorageDetail()),
+                if (Responsive.isDesktop(context))
+                  const SizedBox(
+                    width: defaultPadding,
+                  ),
+                if (Responsive.isDesktop(context))
+                  const Expanded(flex: 2, child: StorageDetail()),
               ],
             )
           ],

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:flutter_application_2/responsive.dart';
 
 import '../constants.dart';
 import 'fileInfo.dart';
@@ -32,9 +33,13 @@ class MyFiles extends StatelessWidget {
         GridView.builder(
             itemCount: details.length,
             shrinkWrap: true,
-            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                childAspectRatio: 1.4,
-                crossAxisCount: 4,
+            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                childAspectRatio: Responsive.isDesktop(context)
+                    ? 1.4
+                    : Responsive.isTablet(context)
+                        ? 1.8
+                        : 1.4,
+                crossAxisCount: Responsive.isDesktop(context) ? 4 : 2,
                 crossAxisSpacing: defaultPadding),
             itemBuilder: (context, index) {
               var detail = details[index];

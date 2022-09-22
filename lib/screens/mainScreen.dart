@@ -4,6 +4,7 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_application_2/screens/dashboard.dart';
 
 import '../components/drawer.dart';
+import '../responsive.dart';
 
 class MainScreen extends StatelessWidget {
   const MainScreen({super.key});
@@ -13,9 +14,8 @@ class MainScreen extends StatelessWidget {
     return Scaffold(
       body: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
-        children: const [
-          // if (Responsive.isDesktop(context))
-          Expanded(child: SideMenu()),
+        children: [
+          if (Responsive.isDesktop(context)) Expanded(child: SideMenu()),
           Expanded(flex: 5, child: DashBoardScreen()),
         ],
       ),

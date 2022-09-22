@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_2/responsive.dart';
 
 import '../constants.dart';
 
@@ -11,13 +12,27 @@ class Header extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       children: [
-        Text(
-          "Dashboard",
-          style: Theme.of(context).textTheme.headline6,
-        ),
-        const Spacer(
-          flex: 2,
-        ),
+        if (!Responsive.isDesktop(context))
+          Row(
+            children: [
+              Icon(
+                Icons.menu,
+                color: Colors.white,
+              ),
+              SizedBox(
+                width: defaultPadding,
+              )
+            ],
+          ),
+        if (!Responsive.isMobile(context))
+          Text(
+            "Dashboard",
+            style: Theme.of(context).textTheme.headline6,
+          ),
+        if (!Responsive.isMobile(context))
+          const Spacer(
+            flex: 2,
+          ),
         const Expanded(child: SearchField()),
         const ProfileCard()
       ],
