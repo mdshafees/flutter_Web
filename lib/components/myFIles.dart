@@ -8,6 +8,7 @@ import 'fileInfo.dart';
 class MyFiles extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    var size = MediaQuery.of(context).size;
     return Column(
       children: [
         Row(
@@ -30,22 +31,43 @@ class MyFiles extends StatelessWidget {
         const SizedBox(
           height: defaultPadding,
         ),
-        GridView.builder(
-            itemCount: details.length,
-            shrinkWrap: true,
-            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                childAspectRatio: Responsive.isDesktop(context)
-                    ? 1.4
-                    : Responsive.isTablet(context)
-                        ? 1.8
-                        : 1.4,
-                crossAxisCount: Responsive.isDesktop(context) ? 4 : 2,
-                crossAxisSpacing: defaultPadding),
-            itemBuilder: (context, index) {
-              var detail = details[index];
-              return FileInfoCard(detail: detail);
-            })
+        Responsive(
+          mobile: FileInfoGridView(
+            crossAxis: size.width < 650 ? 2 : 4,
+            childAspec: size.width < 650 ? 1.3 : 1,
+          ),
+          tablet: FileInfoGridView(),
+          desktop: FileInfoGridView(
+            childAspec: size.width < 1400 ? 1.1 : 1.4,
+          ),
+        )
       ],
     );
+  }
+}
+
+class FileInfoGridView extends StatelessWidget {
+  const FileInfoGridView({
+    super.key,
+    this.childAspec = 1.0,
+    this.crossAxis = 4,
+  });
+
+  final int crossAxis;
+  final double childAspec;
+  @override
+  Widget build(BuildContext context) {
+    return GridView.builder(
+        physics: NeverScrollableScrollPhysics(),
+        itemCount: details.length,
+        shrinkWrap: true,
+        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+            childAspectRatio: childAspec,
+            crossAxisCount: crossAxis,
+            crossAxisSpacing: defaultPadding),
+        itemBuilder: (context, index) {
+          var detail = details[index];
+          return FileInfoCard(detail: detail);
+        });
   }
 }

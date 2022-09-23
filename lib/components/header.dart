@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_2/components/provider.dart';
 import 'package:flutter_application_2/responsive.dart';
+import 'package:provider/provider.dart';
 
 import '../constants.dart';
 
@@ -15,9 +17,14 @@ class Header extends StatelessWidget {
         if (!Responsive.isDesktop(context))
           Row(
             children: [
-              Icon(
-                Icons.menu,
-                color: Colors.white,
+              InkWell(
+                onTap: () {
+                  context.read<MenuController>().menuControll();
+                },
+                child: Icon(
+                  Icons.menu,
+                  color: Colors.white,
+                ),
               ),
               SizedBox(
                 width: defaultPadding,

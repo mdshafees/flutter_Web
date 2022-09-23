@@ -4,6 +4,7 @@ import 'package:flutter_application_2/constants.dart';
 import 'package:flutter_application_2/responsive.dart';
 
 import '../components/chart.dart';
+import '../components/dashboardTab.dart';
 import '../components/header.dart';
 import '../components/myFIles.dart';
 import '../components/recentDetail.dart';
@@ -28,34 +29,7 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
             const SizedBox(
               height: defaultPadding,
             ),
-            Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Expanded(
-                  flex: 5,
-                  child: Column(
-                    children: [
-                      MyFiles(),
-                      const SizedBox(
-                        height: defaultPadding,
-                      ),
-                      const RecentFiles(),
-                      if (!Responsive.isDesktop(context))
-                        const SizedBox(
-                          height: defaultPadding,
-                        ),
-                      if (!Responsive.isDesktop(context)) StorageDetail(),
-                    ],
-                  ),
-                ),
-                if (Responsive.isDesktop(context))
-                  const SizedBox(
-                    width: defaultPadding,
-                  ),
-                if (Responsive.isDesktop(context))
-                  const Expanded(flex: 2, child: StorageDetail()),
-              ],
-            )
+            DashboardTab()
           ],
         ),
       ),
